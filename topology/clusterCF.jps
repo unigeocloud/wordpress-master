@@ -15,6 +15,13 @@ nodes:
     cloudlets: 8
     nodeGroup: bl
     scalingMode: STATEFUL
+    volumes:
+      - "/var/lib/jelastic/SSL"
+    volumeMounts:
+      "/var/lib/jelastic/SSL":
+        readOnly: false
+        sourcePath: "/data/SSL"
+        sourceNodeGroup: storage
     displayName: Load balancer
 
   - nodeType: ${globals.CP_NODE_TYPE}
@@ -87,6 +94,11 @@ onInstall:
   - setNodeDisplayName [bl]: Load balancer
   - setNodeDisplayName [cp]: AppServer
   - setNodeDisplayName [storage]: Storage
+  
+  - log: App Servers Setup
+  - install: ${baseUrl}../scripts/checkSSLStatus.jps?_r=${fn.random}
+    settings:
+      TARGET_NODES: bl
 
   - log: DB Galera  Setup
   - install: https://raw.githubusercontent.com/sych74/mysql-cluster/master/scripts/galera-configuration.jps
