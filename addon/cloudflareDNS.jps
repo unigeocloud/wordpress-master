@@ -26,7 +26,19 @@ settings:
       default: ''
       required: true
 
+globals:
+  CUSTOM_DOMAIN: ${settings.custom_domain}
+  CF_EMAIL: ${settings.cf_email}
+  CF_KEY: ${settings.cf_key}
+  CF_ZONE_ID: ${settings.cf_zone_id}
+
 onInstall:
-  - cmd[bl]:
-      - wget https://raw.githubusercontent.com/sych74/test/master/CF-domain.sh -O ~/CF-domain.sh
-      - bash ~/CF-domain.sh ${settings.cf_email} ${settings.cf_key} ${settings.cf_zone_id} ${settings.custom_domain} ${nodes.bl[0].extIPs}
+
+  - if (nodes.bl):
+    - cmd[bl]:
+      - wget https://raw.githubusercontent.com/sych74/test/master/CF-domain.sh -O ~/bin/CF-domain.sh
+      - bash ~/bin/CF-domain.sh ${globals.CF_EMAIL} ${globals.CF_KEY} ${globals.CF_ZONE_ID} ${globals.CUSTOM_DOMAIN} ${nodes.bl[0].extIPs}
+  - if (!nodes.bl):
+    - cmd[cp]:
+      - wget https://raw.githubusercontent.com/sych74/test/master/CF-domain.sh -O ~/bin/CF-domain.sh
+      - bash ~/bin/CF-domain.sh ${globals.CF_EMAIL} ${globals.CF_KEY} ${globals.CF_ZONE_ID} ${globals.CUSTOM_DOMAIN} ${nodes.cp[0].extIPs}
