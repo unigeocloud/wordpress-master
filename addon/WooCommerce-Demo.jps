@@ -6,6 +6,11 @@ logo: https://raw.githubusercontent.com/jelastic-jps/wordpress-cluster/master/im
 baseUrl: https://raw.githubusercontent.com/sych74/wordpress-master/master
 
 onInstall:
+
+  - if (/llsmp/.test("${nodes.cp.nodeType}") || /litespeed/.test("${nodes.cp.nodeType}")):
+      - cmd[${nodes.cp.master.id}]:
+          wp lscache-admin export_options --filename=/tmp/cache_options.conf --path=/var/www/webroot/ROOT/
+
   - cmd[${nodes.cp.master.id}]: |-
       cd ${SERVER_WEBROOT}
       cp ${SERVER_WEBROOT}/wp-config.php ~/
@@ -22,6 +27,12 @@ onInstall:
       wp db import ~/wp_users.sql --path=${SERVER_WEBROOT} &>> /var/log/run.log
       wp db import ~/wp_usermeta.sql --path=${SERVER_WEBROOT} &>> /var/log/run.log
       wp search-replace test-wordpress-test.demo.jelastic.com ${env.domain} --all-tables --path=${SERVER_WEBROOT} &>> /var/log/run.log
-      
+      bash ~/bin/WPCache.sh --pgcache true --objectcache true
+      wget https://raw.githubusercontent.com/sych74/wordpress-master/master/configs/cp/litespeed/.htaccess_basic -O /var/www/webroot/ROOT/.htaccess
+
+  - if (/llsmp/.test("${nodes.cp.nodeType}") || /litespeed/.test("${nodes.cp.nodeType}")):
+      - cmd[${nodes.cp.master.id}]:
+          wp lscache-admin import_options /tmp/cache_options.conf --path=/var/www/webroot/ROOT/
+
   - install: ${baseUrl}/addon/purgeCache.jps
       
