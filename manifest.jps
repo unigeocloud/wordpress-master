@@ -60,12 +60,7 @@ settings:
       type: displayfield
       name: displayfield
       markup:
-
-    - type: checkbox
-      name: ls-addon
-      caption: Install LiteSpeed High-Performance Web Server
-      value: true
-
+      
     - type: checkbox
       name: le-addon
       caption: Install Let's Encrypt SSL with Auto-Renewal
