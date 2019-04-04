@@ -49,8 +49,3 @@ fields:
   type: displayfield
   name: displayfield
   markup:
-
-- type: checkbox
-  name: le-addon
-  caption: Install Let's Encrypt SSL with Auto-Renewal
-  value: false
