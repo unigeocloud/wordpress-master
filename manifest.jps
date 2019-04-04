@@ -6,70 +6,38 @@ description:
   text: WordPress Cluster package provides integrated autoscaling and high availability for development and production environments.
     The platform automatically deploys and configures chosen tolopology and required addons at specified regions.
   short: WordPress Cluster Pack
-logo: https://raw.githubusercontent.com/sych74/wordpress-master/master/images/wp_logo_70.png?123
+logo: ${baseUrl}/images/wp_logo_70.png
 baseUrl: https://raw.githubusercontent.com/sych74/wordpress-master/master
-settings:
-  fields:
-    - type: list
-      caption: Topology
-      name: topology
-      value: standalone
-      values:
-        - value: standalone
-          caption: Standalone
-          tooltip: <h3 style='margin:5px; text-align:center'>Optimized Elastic Container</h3><div style='text-align:center'>For dev, test and small production sites</div><img width='300' height='200' style='margin:15px 0; margin-left:-10px' src='https://raw.githubusercontent.com/sych74/wordpress-master/master/images/standalone.svg?sanitize=true'>
-        - value: cluster
-          caption: HA Cluster
-          tooltip: <h3 style='margin:5px; text-align:center'>High Availability and Performance</h3><div style='text-align:center'>For medium and large size production sites</div><img width='270' height='360' style='margin:0 0;' src='https://raw.githubusercontent.com/sych74/wordpress-master/master/images/cluster.svg?sanitize=true'>
-      tipParams:
-        dismissDelay: 600000
-        anchor: l
-        hideOnOver: false
-        showDelay: 0
 
-    - caption: Regions
-      type: regionlist
-      name: regions
-      disableInactive: true
-      selectFirstAvailable: true
-      multiSelect: true
-      min: 1
-      max: 2
-      filter:
-        isActive: true
-      default: premium-vz7
+onBeforeInit: |
+  import com.hivext.api.Response;
+  import org.yaml.snakeyaml.Yaml;
+  import com.hivext.api.core.utils.Transport;
 
-    - caption: Env Name
-      type: envname
-      name: envName
-      dependsOn: region
-      randomName: true
-      showFullDomain: false
-      required: true
+  var url = "https://raw.githubusercontent.com/sych74/wordpress-master/master/settings.yaml";
+  var settings = toNative(new Yaml().load(new Transport().get(url)));
+  var resp = jelastic.dev.apps.GetApp("c05ffa5b45628a2a0c95467ebca8a0b4");
 
-    - name: wp_title
-      caption: WP Title
-      type: string
-      inputType: hidden
-      default: HelloWorld
-      required: 'true'
-      regex: "^[\\w-.]*$"
-      regexText: Incorrect WP Title.
+  if (resp.result == 0 || resp.result == Response.PERMISSION_DENIED) {
+      settings.fields.push({
+          type: "checkbox",
+          name: "cdn-addon",
+          caption: "Install Lightning-Fast Premium CDN with 130+ PoPs",
+          value: false
+      });
+  }
 
-    - caption: Addons
-      type: displayfield
-      name: displayfield
-      markup:
-      
-    - type: checkbox
-      name: le-addon
-      caption: Install Let's Encrypt SSL with Auto-Renewal
-      value: true
+  var resp = jelastic.billing.account.GetQuotas(appid, session, 'environment.externalip.enabled');
+  if (resp.result == 0) {  
+      settings.fields.push({
+          type: "checkbox",
+          name: "le-addon",
+          caption: "Install Let's Encrypt SSL with Auto-Renewal",
+          value: false
+      });
+  }
 
-    - type: checkbox
-      name: cdn-addon
-      caption: Install Lightning-Fast Premium CDN with 130+ PoPs
-      value: true
+  return { result : 0, settings: settings };
 
 globals:
   DB_USER: jelastic-${fn.random}
