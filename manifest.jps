@@ -16,9 +16,11 @@ onBeforeInit: |
 
   var url = "https://raw.githubusercontent.com/sych74/wordpress-master/master/settings.yaml";
   var settings = toNative(new Yaml().load(new Transport().get(url)));
-  var resp = jelastic.dev.apps.GetApp("c05ffa5b45628a2a0c95467ebca8a0b4");
+  var isCDN = jelastic.dev.apps.GetApp("c05ffa5b45628a2a0c95467ebca8a0b4");
+  var group = jelastic.billing.account.GetAccount(appid, session);
 
-  if (resp.result == 0 || resp.result == Response.PERMISSION_DENIED) {
+
+  if (isCDN.result == 0 || isCDN.result == Response.PERMISSION_DENIED && group.groupType != 'trial') {
       settings.fields.push({
           type: "checkbox",
           name: "cdn-addon",
@@ -28,7 +30,7 @@ onBeforeInit: |
   }
 
   var resp = jelastic.billing.account.GetQuotas(appid, session, 'environment.externalip.enabled');
-  if (resp.result == 0) {  
+  if (resp.result == 0 && group.groupType != 'trial') {  
       settings.fields.push({
           type: "checkbox",
           name: "le-addon",
@@ -36,7 +38,15 @@ onBeforeInit: |
           value: false
       });
   }
-
+  
+  if (group.groupType == 'trial') {  
+      settings.fields.push({
+          type: "displayfield",
+          name: "displayfield",
+          caption: "Addons are not available for trial users.",
+      });
+  }
+  
   return { result : 0, settings: settings };
 
 globals:
