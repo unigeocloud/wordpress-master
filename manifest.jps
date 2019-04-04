@@ -6,7 +6,7 @@ description:
   text: WordPress Cluster package provides integrated autoscaling and high availability for development and production environments.
     The platform automatically deploys and configures chosen tolopology and required addons at specified regions.
   short: WordPress Cluster Pack
-logo: ${baseUrl}/images/wp_logo_70.png
+logo: https://raw.githubusercontent.com/sych74/wordpress-master/master/images/wp_logo_70.png
 baseUrl: https://raw.githubusercontent.com/sych74/wordpress-master/master
 
 onBeforeInit: |
