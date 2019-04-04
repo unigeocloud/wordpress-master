@@ -19,7 +19,6 @@ onBeforeInit: |
   var isCDN = jelastic.dev.apps.GetApp("c05ffa5b45628a2a0c95467ebca8a0b4");
   var group = jelastic.billing.account.GetAccount(appid, session);
 
-
   if (isCDN.result == 0 || isCDN.result == Response.PERMISSION_DENIED && group.groupType != 'trial') {
       settings.fields.push({
           type: "checkbox",
