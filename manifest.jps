@@ -57,7 +57,7 @@ onBeforeInit: |
             }, {
                 "type": "displayfield",
                 "cls": "x-item-disabled",
-                "value": "Your text"
+                "value": "Install Lightning-Fast Premium CDN with 130+ PoPs"
             }]}, {
             "type": "compositefield",
             "hideLabel": true,
@@ -75,7 +75,7 @@ onBeforeInit: |
             }, {
                 "type": "displayfield",
                 "cls": "x-item-disabled",
-                "value": "Your text"
+                "value": "Install Let's Encrypt SSL with Auto-Renewal"
             }]
       });
   }
