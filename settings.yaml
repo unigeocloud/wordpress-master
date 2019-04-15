@@ -1,4 +1,16 @@
 fields:
+- caption: Regions
+  type: regionlist
+  name: regions
+  disableInactive: true
+  selectFirstAvailable: true
+  multiSelect: true
+  min: 1
+  max: 2
+  filter:
+    isActive: true
+  default: premium-vz7
+
 - type: list
   caption: Topology
   name: topology
@@ -15,18 +27,6 @@ fields:
     anchor: l
     hideOnOver: false
     showDelay: 0
-
-- caption: Regions
-  type: regionlist
-  name: regions
-  disableInactive: true
-  selectFirstAvailable: true
-  multiSelect: true
-  min: 1
-  max: 2
-  filter:
-    isActive: true
-  default: premium-vz7
 
 - caption: Env Name
   type: envname
