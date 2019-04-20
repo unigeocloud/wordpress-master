@@ -11,9 +11,12 @@ var group = jelastic.billing.account.GetAccount(appid, session);
 
 var url = baseUrl + "/configs/settings.yaml";
 var settings = toNative(new Yaml().load(new Transport().get(url)));
+var fields = settings.fields;
+if (group.groupType == 'trial') {
 
-if (group.groupType == 'trial') {    
-    settings.fields.push({
+    fields[fields.length - 1].markup = "ARE NOT AVAILABLE FOR [" + group.groupType.toUpperCase() + "] ACCOUT";
+
+    fields.push({
         "type": "compositefield",
         "hideLabel": true,
         "pack": "left",
@@ -51,7 +54,7 @@ if (group.groupType == 'trial') {
             "cls": "x-item-disabled",
             "value": sslText
         }]
-    });    
+    });
 } else {
     var isCDN = jelastic.dev.apps.GetApp(cdnAppid);
     if (isCDN.result == 0 || isCDN.result == Response.PERMISSION_DENIED) {
@@ -65,7 +68,7 @@ if (group.groupType == 'trial') {
 
     var resp = jelastic.billing.account.GetQuotas('environment.externalip.enabled');
     if (resp.result == 0 && resp.array[0].value) {
-        settings.fields.push({
+        fields.push({
             type: "checkbox",
             name: "le-addon",
             caption: sslText,
