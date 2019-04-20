@@ -6,82 +6,10 @@ description:
   text: WordPress Cluster package provides integrated autoscaling and high availability for development and production environments.
     The platform automatically deploys and configures chosen tolopology and required addons at specified regions.
   short: WordPress Cluster Pack
-logo: https://raw.githubusercontent.com/sych74/wordpress-master/master/images/wp_logo_70.png
+logo: /images/wp_logo_70.png
 baseUrl: https://raw.githubusercontent.com/sych74/wordpress-master/master
 
-onBeforeInit: |
-  import com.hivext.api.Response;
-  import org.yaml.snakeyaml.Yaml;
-  import com.hivext.api.core.utils.Transport;
-
-  var url = "https://raw.githubusercontent.com/sych74/wordpress-master/master/settings.yaml";
-  var settings = toNative(new Yaml().load(new Transport().get(url)));
-  var isCDN = jelastic.dev.apps.GetApp("c05ffa5b45628a2a0c95467ebca8a0b4");
-  var group = jelastic.billing.account.GetAccount(appid, session);
-
-
-  if (isCDN.result == 0 || isCDN.result == Response.PERMISSION_DENIED && group.groupType != 'trial') {
-      settings.fields.push({
-          type: "checkbox",
-          name: "cdn-addon",
-          caption: "Install Lightning-Fast Premium CDN with 130+ PoPs",
-          value: false
-      });
-  }
-
-  var resp = jelastic.billing.account.GetQuotas(appid, session, 'environment.externalip.enabled');
-  if (resp.result == 0 && group.groupType != 'trial') {  
-      settings.fields.push({
-          type: "checkbox",
-          name: "le-addon",
-          caption: "Install Let's Encrypt SSL with Auto-Renewal",
-          value: false
-      });
-  }
-  
-  if (group.groupType == 'trial') {  
-      settings.fields.push({
-            "type": "compositefield",
-            "hideLabel": true,
-            "pack": "left",
-            "itemCls": "deploy-manager-grid",
-            "cls": "x-grid3-row-unselected",
-            "items": [{
-                "type": "spacer",
-                "width": 4
-            }, {
-                "type": "displayfield",
-                "cls": "x-grid3-row-checker x-item-disabled",
-                "width": 30,
-                "height": 20
-            }, {
-                "type": "displayfield",
-                "cls": "x-item-disabled",
-                "value": "Install Lightning-Fast Premium CDN with 130+ PoPs"
-            }]}, {
-            "type": "compositefield",
-            "hideLabel": true,
-            "pack": "left",
-            "itemCls": "deploy-manager-grid",
-            "cls": "x-grid3-row-unselected",
-            "items": [{
-                "type": "spacer",
-                "width": 4
-            }, {
-                "type": "displayfield",
-                "cls": "x-grid3-row-checker x-item-disabled",
-                "width": 30,
-                "height": 20
-            }, {
-                "type": "displayfield",
-                "cls": "x-item-disabled",
-                "value": "Install Let's Encrypt SSL with Auto-Renewal"
-            }]
-      });
-  }
-  
-  return { result : 0, settings: settings };
-
+onBeforeInit: /scripts/settings.js
 globals:
   DB_USER: jelastic-${fn.random}
   DB_PASS: ${fn.password(10)}
