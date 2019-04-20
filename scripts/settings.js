@@ -4,7 +4,7 @@ import com.hivext.api.core.utils.Transport;
 
 
 var cdnAppid = "c05ffa5b45628a2a0c95467ebca8a0b4";
-var baseUrl = "https://raw.githubusercontent.com/sych74/wordpress-master";
+var baseUrl = "https://raw.githubusercontent.com/sych74/wordpress-master/master";
 var cdnText = "Install Lightning-Fast Premium CDN with 130+ PoPs",
     sslText = "Install Let's Encrypt SSL with Auto-Renewal";
 var group = jelastic.billing.account.GetAccount(appid, session);
