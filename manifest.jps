@@ -1,6 +1,6 @@
 version: 1.1
 type: install
-id: wp-cluster-startup
+id: wp-cluster-pack
 name: Enterprise WordPress
 description:
   text: WordPress Cluster package provides integrated autoscaling and high availability for development and production environments.
