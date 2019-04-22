@@ -15,7 +15,7 @@ globals:
   DB_PASS: ${fn.password(10)}
   SYNC_PASS: ${fn.password(10)}
   PROTOCOL: http
-  WP_ADMIN_PASS: "${fn.password(10)}"
+  WP_ADMIN_PASS: ${fn.password(10)}
   MU_REGIONS: false
   CLUSTER_TYPE: region
   SUCCESS: success
