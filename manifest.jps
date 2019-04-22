@@ -22,15 +22,15 @@ globals:
 
 onInstall:
   - if ('${settings.topology}' == 'standalone'):
-        setGlobals:
-          CP_NODE_TYPE: lemp-dockerized
-          APP_CONFIGS_PATH: /etc/nginx/conf.d/SITES_ENABLED
+      setGlobals:
+        CP_NODE_TYPE: lemp-dockerized
+        APP_CONFIGS_PATH: /etc/nginx/conf.d/SITES_ENABLED
 
   - if ('${settings.topology}' == 'cluster'):
-          setGlobals:
-            CP_NODE_TYPE: nginxphp-redis
-            BL_NODE_TYPE: nginx-dockerized
-            APP_CONFIGS_PATH: /etc/nginx/conf.d/SITES_ENABLED
+      setGlobals:
+        CP_NODE_TYPE: nginxphp-redis
+        BL_NODE_TYPE: nginx-dockerized
+        APP_CONFIGS_PATH: /etc/nginx/conf.d/SITES_ENABLED
 
   - createEnvs: ${settings.envName}
 
@@ -63,7 +63,7 @@ actions:
           result:0,
           regions:'${settings.regions}'.split(','),
           envGroups:eval('(' + MANIFEST + ')').envGroups
-        };
+        }
 
     - setGlobals:
         region1: ${response.regions[0]}
@@ -116,8 +116,7 @@ actions:
           db_pass: ${globals.DB_PASS}
 
     - script: |
-        return { result : 0, regions: '${settings.regions}'.split(',') };
-
+        return { result : 0, regions: '${settings.regions}'.split(',') };    
   run:
     - script: |
         var resp, result;
