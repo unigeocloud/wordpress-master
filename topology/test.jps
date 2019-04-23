@@ -5,6 +5,7 @@ name: Wordpress Standalone ${settings.CP_NODE_TYPE}
 globals:
   CP_NODE_TYPE: ${settings.CP_NODE_TYPE}
   BL_NODE_TYPE: ${settings.BL_NODE_TYPE}
+  REGION: ${settings.REGION}
 
 skipNodeEmails: true
 nodes:
@@ -17,6 +18,6 @@ nodes:
 onInstall:
 
 - api: jelastic.env.control.SetEnvDisplayName
-  displayName: Wordpress Standalone ${settings.CP_NODE_TYPE}
+  displayName: WP Standalone ${settings.REGION}
   
 
