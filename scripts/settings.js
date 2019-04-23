@@ -76,6 +76,7 @@ if (group.groupType == 'trial') {
             caption: lsText,
             value: true
         });
+    }
 
     var resp = jelastic.billing.account.GetQuotas('environment.externalip.enabled');
     if (resp.result == 0 && resp.array[0].value) {
