@@ -4,9 +4,11 @@ import com.hivext.api.core.utils.Transport;
 
 
 var cdnAppid = "c05ffa5b45628a2a0c95467ebca8a0b4";
+var lsAppid = "9e6afcf310004ac84060f90ff41a5aba";
 var baseUrl = "https://raw.githubusercontent.com/sych74/wordpress-master/master";
 var cdnText = "Install Lightning-Fast Premium CDN with 130+ PoPs",
     sslText = "Install Let's Encrypt SSL with Auto-Renewal";
+    lsText = "Install LiteSpeed High-Performance Web Server";
 var group = jelastic.billing.account.GetAccount(appid, session);
 
 var url = baseUrl + "/configs/settings.yaml";
@@ -65,6 +67,15 @@ if (group.groupType == 'trial') {
             value: true
         });
     }
+
+    var isLS = jelastic.dev.apps.GetApp(lsAppid);
+    if (isLS.result == 0 || isLS.result == Response.PERMISSION_DENIED) {
+        settings.fields.push({
+            type: "checkbox",
+            name: "ls-addon",
+            caption: lsText,
+            value: true
+        });
 
     var resp = jelastic.billing.account.GetQuotas('environment.externalip.enabled');
     if (resp.result == 0 && resp.array[0].value) {
