@@ -17,7 +17,7 @@ globals:
   PROTOCOL: http
   WP_ADMIN_PASS: ${fn.password(10)}
   MU_REGIONS: false
-  CLUSTER_TYPE: region
+  CLUSTER_TYPE: oneregion
   SUCCESS: success
 
 onInstall:
