@@ -5,6 +5,7 @@ name: Wordpress Standalone
 globals:
   CP_NODE_TYPE: ${settings.CP_NODE_TYPE}
   BL_NODE_TYPE: ${settings.BL_NODE_TYPE}
+  REGION: ${settings.REGION}
 
 skipNodeEmails: true
 nodes:
@@ -17,6 +18,9 @@ nodes:
       SERVER_WEBROOT: /var/www/webroot/ROOT
   
 onInstall:
+  - api: jelastic.env.control.SetEnvDisplayName
+    displayName: WP Standalone ${settings.REGION}
+
   - setGlobals:
       DB_USER: ${settings.db_user:jelastic-[fn.random]}
       DB_PASS: ${settings.db_pass:[fn.password(10)]}
