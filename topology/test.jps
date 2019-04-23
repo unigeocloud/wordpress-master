@@ -1,6 +1,6 @@
 jpsType: install
 jpsVersion: '1.1'
-name: Wordpress Standalone
+name: Wordpress Standalone ${settings.CP_NODE_TYPE}
 
 globals:
   CP_NODE_TYPE: ${settings.CP_NODE_TYPE}
