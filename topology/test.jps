@@ -14,4 +14,9 @@ nodes:
     nodeGroup: cp
     env:
       SERVER_WEBROOT: /var/www/webroot/ROOT
+onInstall:
+
+- api: jelastic.env.control.SetEnvDisplayName
+  displayName: Wordpress Standalone ${settings.CP_NODE_TYPE}
   
+
