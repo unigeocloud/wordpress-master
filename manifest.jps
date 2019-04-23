@@ -236,6 +236,7 @@ actions:
       - jps: https://raw.githubusercontent.com/dzotic9/file-sync/master/manifest.jps?_r=${fn.random}
         envName: ${settings.envName}
         nodeGroup: ${globals.lsync-nodeGroup}
+        skipEmail: true
         settings:
           optional: two_envs
           address: ${globals.storage-IP1}
@@ -245,6 +246,7 @@ actions:
       - jps: https://raw.githubusercontent.com/dzotic9/file-sync/master/manifest.jps?_r=${fn.random}
         envName: ${settings.envName}-1
         nodeGroup: ${globals.lsync-nodeGroup}
+        skipEmail: true
         settings:
           optional: two_envs
           address:  ${globals.storage-IP0}
@@ -257,12 +259,14 @@ actions:
           - jps: https://github.com/SlavaKatiukha/lets-encrypt/blob/master/manifest.jps?_r=${fn.random}
             envName: ${settings.envName}
             nodeGroup: ${globals.le-nodeGroup}
+            skipEmail: true
             settings:
               customDomains: ${settings.envName}.${globals.REGION-0}
 
           - jps: https://github.com/SlavaKatiukha/lets-encrypt/blob/master/manifest.jps?_r=${fn.random}
             envName: ${settings.envName}-1
             nodeGroup: ${globals.le-nodeGroup}
+            skipEmail: true
             settings:
               customDomains: ${settings.envName}-1.${globals.REGION-1}
 
@@ -270,6 +274,7 @@ actions:
         install: https://github.com/jelastic-jps/lets-encrypt/blob/master/manifest.jps?_r=${fn.random}
         envName: ${settings.envName}
         nodeGroup: ${globals.le-nodeGroup}
+        skipEmail: true
         settings:
           customDomains: ${settings.envName}.${globals.REGION-0}
 
@@ -277,6 +282,7 @@ actions:
     - install: https://raw.githubusercontent.com/edgeport/cdn/master/manifest.yml?_r=${fn.random}
       envName: ${this.envName}
       nodeGroup: ${globals.cdn-nodeGroup}
+      skipEmail: true
       settings:
         masterEnv: ${this.masterEnv:}
 
