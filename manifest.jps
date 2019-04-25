@@ -321,7 +321,7 @@ actions:
             bash ~/bin/WPCache.sh --pgcache true --objectcache true --REDIS_HOST 127.0.0.1
 
 success:
-  email: text/${settings.topology}/${globals.CLUSTER_TYPE}.md?_r=${fn.random}
-  text: text/${globals.CLUSTER_TYPE}/${globals.SUCCESS}.md?_r=${fn.random}
+  email: success/email/${settings.topology}/${globals.CLUSTER_TYPE}.md?_r=${fn.random}
+  text: success/text/${globals.CLUSTER_TYPE}/${globals.SUCCESS}.md?_r=${fn.random}
 
 startPage: ${globals.PROTOCOL}://${settings.envName}.${globals.REGION-0}/
