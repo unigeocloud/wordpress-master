@@ -93,6 +93,12 @@ if (group.groupType == 'trial') {
             value: true
         });
     }
+    settings.fields.push({
+        type: "checkbox",
+        name: "mu-addon",
+        caption: muText,
+        value: true
+    });
 }
 
 return {
