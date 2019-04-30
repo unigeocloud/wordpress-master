@@ -9,6 +9,7 @@ var baseUrl = "https://raw.githubusercontent.com/sych74/wordpress-master/master"
 var cdnText = "Install Lightning-Fast Premium CDN with 130+ PoPs",
     sslText = "Install Let's Encrypt SSL with Auto-Renewal";
     lsText = "Install LiteSpeed High-Performance Web Server";
+    muText = "Install WordPress Multisite Network";
 var group = jelastic.billing.account.GetAccount(appid, session);
 
 var url = baseUrl + "/configs/settings.yaml";
@@ -56,6 +57,11 @@ if (group.groupType == 'trial') {
             "cls": "x-item-disabled",
             "value": sslText
         }]
+    }, {
+        type: "checkbox",
+        name: "mu-addon",
+        caption: muText,
+        value: true
     });
 } else {
     var isCDN = jelastic.dev.apps.GetApp(cdnAppid);
