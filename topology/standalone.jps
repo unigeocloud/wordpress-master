@@ -10,7 +10,6 @@ globals:
 skipNodeEmails: true
 nodes:
   - nodeType: ${globals.CP_NODE_TYPE}
-    extip: true
     count: 1
     cloudlets: 16
     nodeGroup: cp
