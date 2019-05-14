@@ -9,7 +9,6 @@ fields:
   max: 2
   filter:
     isActive: true
-  default: premium-vz7
 
 - type: list
   caption: Topology
