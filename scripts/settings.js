@@ -74,16 +74,6 @@ if (group.groupType == 'trial') {
         });
     }
 
-    var isLS = jelastic.dev.apps.GetApp(lsAppid);
-    if (isLS.result == 0 || isLS.result == Response.PERMISSION_DENIED) {
-        settings.fields.push({
-            type: "checkbox",
-            name: "ls-addon",
-            caption: lsText,
-            value: true
-        });
-    }
-
     var resp = jelastic.billing.account.GetQuotas('environment.externalip.enabled');
     if (resp.result == 0 && resp.array[0].value) {
         fields.push({
