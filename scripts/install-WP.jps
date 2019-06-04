@@ -20,7 +20,7 @@ onInstall:
 actions:
   installWP:
     - cmd[${globals.TARGET_NODE_ID}]: |-
-        cd ${SERVER_WEBROOT};
+        rm -rf ${SERVER_WEBROOT}/*;
         wget -qO- 'https://wordpress.org/latest.tar.gz' | tar xz -C /tmp && mv /tmp/wordpress/* ${SERVER_WEBROOT}
         mysql -u${globals.DB_USER} -p${globals.DB_PASS} -h ${globals.DB_HOST} -e "CREATE DATABASE IF NOT EXISTS ${globals.DB_NAME};"
         wp core config --dbhost=${globals.DB_HOST} --dbname=${globals.DB_NAME} --dbuser=${globals.DB_USER} --dbpass=${globals.DB_PASS} --path=${SERVER_WEBROOT}
@@ -30,6 +30,5 @@ actions:
 
   nginxPurgeCache:
     - cmd[${globals.TARGET_NODE_ID}]: |-
-        cd ${SERVER_WEBROOT};
-        wp plugin install ${baseUrl}../scripts/nginx-fastcgi-cache-purge.zip
-        wp plugin activate nginx-fastcgi-cache-purge
+        wp plugin install ${baseUrl}../scripts/nginx-fastcgi-cache-purge.zip --path=${SERVER_WEBROOT}
+        wp plugin activate nginx-fastcgi-cache-purge --path=${SERVER_WEBROOT}
