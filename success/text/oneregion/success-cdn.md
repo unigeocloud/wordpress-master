@@ -10,7 +10,7 @@ Use the following credentials to access the admin panel:
 
 The instructions below can help you with further managing your WordPress:
 
-* [Bind custom domain](https://docs.jelastic.com/ssh-access)
+* [Bind custom domain](https://docs.jelastic.com/custom-domain-via-cname)
 * [Share access to the environment](http://docs.jelastic.com/share-environment)
 * [Adjust automatic vertical scaling settings](http://docs.jelastic.com/automatic-vertical-scaling)
 * [Configure automatic horizontal scaling](http://docs.jelastic.com/automatic-horizontal-scaling)
