@@ -2,7 +2,6 @@ import com.hivext.api.Response;
 import org.yaml.snakeyaml.Yaml;
 import com.hivext.api.core.utils.Transport;
 
-
 var cdnAppid = "c05ffa5b45628a2a0c95467ebca8a0b4";
 var lsAppid = "9e6afcf310004ac84060f90ff41a5aba";
 var baseUrl = "https://raw.githubusercontent.com/sych74/wordpress-master/master";
