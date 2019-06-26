@@ -5,7 +5,7 @@
 server {
     listen       443 http2;
     listen       [::]:443 http2;
-    server_name  _;
+    server_name  localhost;
 
     ssl                  on;
     ssl_certificate      /var/lib/jelastic/SSL/jelastic.chain;
