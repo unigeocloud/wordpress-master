@@ -42,6 +42,12 @@ onInstall:
     settings:
       TARGET_NODES: cp
    
-  - log: Addon for caches purged
-  - install: ${baseUrl}../scripts/addons.jps?_r=${fn.random}
+  - log: App Server Configuration
+  - install: ${baseUrl}../scripts/setup-CP.jps?_r=${fn.random}
+    settings:
+      TARGET_NODES: cp
 
+  - log: Site Configuration
+  - install: ${baseUrl}../scripts/setup-SITES.jps?_r=${fn.random}
+    settings:
+      TARGET_NODES: cp
