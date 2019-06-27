@@ -6,7 +6,7 @@
 Use the following credentials to access the admin panel:   
 
 **Admin Panel**: [${globals.PROTOCOL}://${settings.envName}.${globals.REGION-0}/wp-admin/](${globals.PROTOCOL}://${settings.envName}.${globals.REGION-0}/wp-admin/)  
-**Login**: admin  
+**Login**: ${user.email}  
 **Password**: ${globals.WP_ADMIN_PASS}  
 
 The instructions below can help you with further managing your WordPress:
