@@ -42,8 +42,6 @@ nodes:
         readOnly: false
         sourcePath: "/data/.cache"
         sourceNodeGroup: storage
-
-        
     env:
       SERVER_WEBROOT: /var/www/webroot/ROOT
 
@@ -73,13 +71,13 @@ onAfterScaleOut[nodeGroup:bl]:
     setNodeDisplayName [${@i.id}]: Load balancer
 
 onAfterMigrate:
-  install: ${baseUrl}../addon/Domain.jps?_r=${fn.random}
+  install: https://raw.githubusercontent.com/unigeocloud/wordpress-master/master/addon/Domain.jps?_r=${fn.random}
   envName: ${event.response.env.envName}
   settings:
     new_domain: ${event.response.env.domain}
     
 onAfterClone:
-  install: ${baseUrl}../addon/Domain.jps?_r=${fn.random}
+  install: https://raw.githubusercontent.com/unigeocloud/wordpress-master/master/addon/Domain.jps?_r=${fn.random}
   envName: ${event.response.env.envName}
   settings:
     new_domain: ${event.response.env.domain}
