@@ -27,15 +27,9 @@ actions:
         sudo jem service restart
 
   nginx:
-    - if (/lemp/.test("${nodes.cp.nodeType}")):
-        - cmd[${globals.TARGET_NODES}]: |-
-            mkdir -p /var/www/webroot/SITES_ENABLED;
-            ln -s /var/www/webroot/SITES_ENABLED /etc/nginx/conf.d/SITES_ENABLED;
-        - cmd[${globals.TARGET_NODES}]: |-
-            mkdir -p /var/www/webroot/SSL;
-            ln -s /var/www/webroot/SSL /var/lib/jelastic/SSL;
-          user: root
     - cmd[${globals.TARGET_NODES}]: |-
+        mkdir -p /var/www/webroot/SITES_ENABLED;
+        ln -s /var/www/webroot/SITES_ENABLED /etc/nginx/conf.d/SITES_ENABLED;
         wget ${baseUrl}../configs/cp/nginx/nginx.conf -O /etc/nginx/nginx.conf
         wget ${baseUrl}../configs/cp/nginx/nossl.conf -O /etc/nginx/conf.d/nossl.conf
         wget ${baseUrl}../configs/cp/nginx/ssl.conf.disabled -O /etc/nginx/conf.d/ssl.conf.disabled
@@ -43,6 +37,7 @@ actions:
         wget ${baseUrl}../scripts/checkNginxStatus.sh -O ~/bin/checkNginxStatus.sh
         chmod +x ~/bin/checkNginxStatus.sh
         crontab -l | { cat; echo "* * * * * /bin/bash ~/bin/checkNginxStatus.sh"; } | crontab
+        sudo jem service restart
         
   wp-cli:
     - cmd[${globals.TARGET_NODES}]: |- 
