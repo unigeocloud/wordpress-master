@@ -15,8 +15,6 @@ onInstall:
       - redis: 
          PHP_CONFIG_PATH: /usr/local/lsws/lsphp73/etc/php.d
 
-  - wp-cli
-
 actions:
   redis:
     - cmd[${globals.TARGET_NODES}]: |-
