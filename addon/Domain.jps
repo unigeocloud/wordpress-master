@@ -15,6 +15,6 @@ globals:
       
 onInstall:
     - cmd[${nodes.cp.master.id}]:
-        wp option get siteurl --path=/var/www/webroot/ROOT
+        wp option get siteurl --path=/var/www/webroot/ROOT | cut -d'/' -f3
     - cmd[${nodes.cp.master.id}]:
         wp search-replace '${response.responses.out}' '${globals.NEW_DOMAIN}' --skip-columns=guid --all-tables --path=/var/www/webroot/ROOT
