@@ -15,7 +15,19 @@ nodes:
     nodeGroup: cp
     env:
       SERVER_WEBROOT: /var/www/webroot/ROOT
-  
+
+onAfterMigrate:
+  install: https://raw.githubusercontent.com/sych74/wordpress-master/master/addon/Domain.jps?_r=${fn.random}
+  envName: ${event.response.env.envName}
+  settings:
+    new_domain: ${event.response.env.domain}
+    
+onAfterClone:
+  install: https://raw.githubusercontent.com/sych74/wordpress-master/master/addon/Domain.jps?_r=${fn.random}
+  envName: ${event.response.env.envName}
+  settings:
+    new_domain: ${event.response.env.domain}
+
 onInstall:
   - api: jelastic.env.control.SetEnvDisplayName
     displayName: WP Standalone ${settings.REGION}
