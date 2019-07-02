@@ -32,14 +32,14 @@ onInstall:
   - if (/llsmp/.test("${nodes.cp.nodeType}") || /litespeed/.test("${nodes.cp.nodeType}")):
     - if ('${globals.MODE}' == 'subdir'):
         cmd[${nodes.cp.master.id}]: |-
-          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdir -O /var/www/webroot/ROOT/.htaccess_01
-          sudo jem service restart
+          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdir -O /tmp/.htaccess_wpmu
+          
     - if ('${globals.MODE}' == 'subdom'):
         cmd[${nodes.cp.master.id}]: |-
-          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdom -O /var/www/webroot/ROOT/.htaccess_01
-          sudo jem service restart
+          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdom -O /tmp/.htaccess_wpmu
 
   - cmd[${nodes.cp.master.id}]: |-
+      cat /tmp/.htaccess_wpmu >> /var/www/webroot/ROOT/.htaccess
       wget ${baseUrl}/scripts/WPCache.sh?_r=${fn.random} -O ~/WPCache.sh &>> /var/log/run.log
       bash ~/WPCache.sh --wpmu true --MODE ${settings.mode}
       
