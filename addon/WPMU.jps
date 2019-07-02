@@ -32,11 +32,11 @@ onInstall:
   - if (/llsmp/.test("${nodes.cp.nodeType}") || /litespeed/.test("${nodes.cp.nodeType}")):
     - if ('${globals.MODE}' == 'subdir'):
         cmd[${nodes.cp.master.id}]: |-
-          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdir -O /var/www/webroot/ROOT/.htaccess_subdir
+          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdir -O /var/www/webroot/ROOT/.htaccess_01
           sudo jem service restart
     - if ('${globals.MODE}' == 'subdom'):
         cmd[${nodes.cp.master.id}]: |-
-          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdom -O /var/www/webroot/ROOT/.htaccess_subdom
+          wget ${baseUrl}/configs/cp/litespeed/.htaccess_subdom -O /var/www/webroot/ROOT/.htaccess_01
           sudo jem service restart
 
   - cmd[${nodes.cp.master.id}]: |-
