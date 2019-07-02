@@ -1,4 +1,5 @@
-<IfModule LiteSpeed>
+# BEGIN WordPress in the network (subdomains)
+<IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
@@ -13,3 +14,4 @@ RewriteRule ^(wp-(content|admin|includes).*) $1 [L]
 RewriteRule ^(.*\.php)$ $1 [L]
 RewriteRule . index.php [L]
 </IfModule>
+# END WordPress
