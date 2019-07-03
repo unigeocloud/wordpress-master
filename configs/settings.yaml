@@ -27,7 +27,7 @@ fields:
     hideOnOver: false
     showDelay: 0
 
-- caption: Env Name
+- caption: Environment
   type: envname
   name: envName
   dependsOn: region
@@ -44,7 +44,7 @@ fields:
   regex: "^[\\w-.]*$"
   regexText: Incorrect WP Title.
 
-- caption: Addons
+- caption: Additions
   type: displayfield
   name: displayfield
   markup:
