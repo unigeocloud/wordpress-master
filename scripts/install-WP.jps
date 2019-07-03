@@ -27,6 +27,7 @@ actions:
         wp core install --title="${globals.WP_TITLE}" --admin_user=${user.email} --admin_password=${globals.WP_ADMIN_PASS} --url=${globals.WP_URL} --admin_email=${user.email} --skip-email --path=${SERVER_WEBROOT}
         wget ${baseUrl}../configs/wordpress/wp-jelastic.php -O ${SERVER_WEBROOT}/wp-jelastic.php
         sed -i "s/.*'wp-settings.php';.*/require_once ABSPATH . 'wp-jelastic.php';\n&/" ${SERVER_WEBROOT}/wp-config.php
+        wget ${baseUrl}../images/favicon.ico -O ${SERVER_WEBROOT}/favicon.ico
 
   nginxPurgeCache:
     - cmd[${globals.TARGET_NODE_ID}]: |-
