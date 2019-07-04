@@ -1,6 +1,6 @@
 jpsType: update
 jpsVersion: '1.1'
-name: WooCommerce demo data for Wordpress
+name: WooCommerce demo data for WordPress
 description: WooCommerce demo data for Wordpress
 logo: https://raw.githubusercontent.com/jelastic-jps/wordpress-cluster/master/images/wp-cluster.png
 baseUrl: https://raw.githubusercontent.com/sych74/wordpress-master/master
