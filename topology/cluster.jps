@@ -1,6 +1,6 @@
 jpsType: install
 jpsVersion: '1.1'
-name: Wordpress Cluster
+name: WordPress Cluster
 
 globals:
   CP_NODE_TYPE: ${settings.CP_NODE_TYPE}
