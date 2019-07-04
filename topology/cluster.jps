@@ -83,6 +83,9 @@ onAfterClone:
     new_domain: ${event.response.env.domain}
 
 onInstall:
+  - log: Auto Scaling Triggers
+  - script: "${baseUrl}../scripts/addTriggers.js"
+
   - setGlobals:
       DB_USER: ${settings.db_user:jelastic-[fn.random]}
       DB_PASS: ${settings.db_pass:[fn.password(10)]}
